@@ -1,0 +1,128 @@
+{{ extend 'layout.html' }}
+
+<div class="row innerheadercontainer">
+  <div class="col-md-12 innerheader">
+    <div class="row">
+      <div class="col-md-5">
+        <div class="row pagepath">
+          <div class="col-md-12">
+            <a href="{{=URL('default','index')}}">Home </a>>> Compete
+          </div>
+        </div>
+        <div class="row pagetitle">
+          <div class="col-md-12">
+            <h3>All Contests</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+    <div align="col-md-8">
+      <img width="700px" float="left" height="150px"
+      src="{{=URL('static', 'images/Compete.png')}}" />
+    </div>
+
+</div>
+<br/>
+<div class="row">
+  <div class="col-md-12">
+
+  <h3>Upcoming Contests</h3>
+  {{ if len(futurecontests)==0 :}}
+  <h4 align="center">No Upcoming Contests</h4>
+  {{else:}}
+  <table class="table table-striped">
+    <thead class="thead-inverse">
+      <tr>
+        <th>Contest Name</th>
+        <th>Author</th>
+        <th>Start Time</th>
+        <th>
+          End Time
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+    {{for p in futurecontests:}}
+      <tr>
+        <td><a href={{=URL('contest','view',args=p.id)}}>{{=p.Contest_Name}}</a></td>
+        <td>{{=p.author.first_name}}</td>
+        <td>{{=p.start_time }}</td>
+        <td>
+        {{=(p.start_time + datetime.timedelta(hours=p.duration))}}
+        </td>
+      </tr>
+      {{pass}}
+      {{pass}}
+    </tbody>
+    </table>
+  </div>
+  </div>
+<br/>
+  <div class="row">
+    <div class="col-md-12">
+
+    <h3>Running Contests</h3>
+    {{ if len(presentcontests)==0 :}}
+    <h4 align="center">No Contest Running Right Now</h4>
+    {{else:}}
+    <table class="table table-striped">
+      <thead class="thead-inverse">
+        <tr>
+          <th>Contest Name</th>
+          <th>Author</th>
+          <th>Start Time</th>
+          <th>
+            End Time
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+      {{for p in presentcontests:}}
+        <tr>
+          <td><a href={{=URL('contest','view',args=p.id)}}>{{=p.Contest_Name}}</td>
+          <td>{{=p.author.first_name}}</td>
+          <td>{{=p.start_time }}</td>
+          <td>
+          {{=(p.start_time + datetime.timedelta(hours=p.duration))}}
+          </td>
+        </tr>
+        {{pass}}
+        {{pass}}
+      </tbody>
+      </table>
+    </div>
+    </div>
+  <br/>
+    <div class="row">
+      <div class="col-md-12">
+
+      <h3>Past Contests</h3>
+      <table class="table table-striped">
+        <thead class="thead-inverse">
+          <tr>
+            <th>Contest Name</th>
+            <th>Author</th>
+            <th>Start Time</th>
+            <th>
+              End Time
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+        {{for p in pastcontests:}}
+          <tr>
+            <td><a href={{=URL('contest','view',args=p.id)}}>{{=p.Contest_Name}}</td>
+            <td>{{=p.author.first_name}}</td>
+            <td>{{=p.start_time }}</td>
+            <td>
+            {{=(p.start_time + datetime.timedelta(hours=p.duration))}}
+            </td>
+          </tr>
+          {{pass}}
+        </tbody>
+        </table>
+      </div>
+      </div>

@@ -1,0 +1,39 @@
+.image_div
+{
+    padding : 10px ;
+    display : inline-block ;
+}
+.image_div_inner
+{
+    /*display : inline-block ;*/
+    padding : 10px ;
+    padding-left: 60px ;
+}
+.my_button
+{
+    padding-left: 50px ;
+    padding-top: 15px ;
+}
+.my_upload_image
+{
+    padding-top:25px;
+}
+.my_label2
+{
+    font-size:2rem;
+    padding-left:30px;
+    padding-top:10px ;
+
+}
+.my_label3
+{
+    font-size:1.4rem;
+    padding-left:30px;
+    padding-top:20px ;
+}
+.my_label
+{
+    font-size:2rem;
+    padding-left:30px;
+    padding-top:10px ;
+}

@@ -1,0 +1,83 @@
+{{extend 'layout.html'}}
+<style>
+    .m
+    {
+        cursor: pointer;
+    }
+    pre{
+    word-wrap: break-word;
+        white-space:pre-wrap;
+    }
+</style>
+<div class="row">
+    <div class="col-md-8" style="font-size:6em">{{=post_blog.title}}</div>
+ <div class="col-md-4">
+     <div class="row"><br/></div>
+     <div class="row"><br/></div>
+     <div class="row"><br/></div>
+</div>
+</div>
+<br/>
+<div class="row">
+    <div class="col-md-8">{{=PRE(post_blog.description)}}</div>
+    <div class="col-md-1">
+          <form><input type="hidden" id="idss" name="idss" value="" /></form>
+        <div style="float:right; display:inline-inline"> <img style="height:20px; width:20px; padding:0px" src="{{=URL('static','images/likec.jpeg')}}"/><span id="q{{=post_blog.id}}">{{=likes}}</span> <br />
+ <button style="padding:0px" id="bp{{=post_blog.id}}" onclick="document.getElementById('idss').value={{=post_blog.id}};
+                ajax('{{=URL('blog','add_likep')}}', ['idss'], 'q{{=post_blog.id}}');"><img style="height:25px; width:25px; padding:0px" src="{{=URL('static','images/index.png')}}"/></button>
+    </div>
+    <div id="q{{post_blog.id}}">{{post_blog.number_likes}}</div>
+
+    </div>
+</div>
+<br/>
+
+<br/>
+<form><input type="hidden" id="ids" name="ids" value="" /></form>
+
+<div class="row">
+    {{for comments in comment:}}
+    <div>
+    <div class="col-md-6"  style="border-style: solid;
+    border-width: 1px;border-radius: 5px;padding:7px;">{{=comments.comment_text}}</div><br/>
+    <!--<div class="col-md-2"><div class= "m" style="color:purple" id="b{{=comments.id}}" onclick="document.getElementById('ids').value={{=comments.id}};ajax('{{=URL('blog','add_like')}}',['ids'], 'ids');"onmouseover="document.getElementById('b{{=comments.id}}').style.color='red';" onmouseout="document.getElementById('b{{=comments.id}}').style.color='purple';">Like
+</div><br/>
+<div>
+          <img style="height:20px; width:20px; padding:0px" src="{{=URL('static','images/likec.jpeg')}}"/><span id='l{{=comments.id}}'>{{=comments.number_likes}}</span>
+      </div>-->
+    </div>  
+    </div>
+
+    {{pass}}
+</div>
+
+
+<form enctype="multipart/form-data" _action="(={{URL('blog_show',args=[post_blog.id,page])}})" method="post" role="form">
+  <table>
+    <tr id="commnets_blog_comment_text__row">
+<!--        <td><label id="commnets_blog_comment_text__label"
+                  for="commnets_blog_comment_text">Comment </label></td> -->
+       <td><input type="text" class="string"
+                  name="comment_text" value="" id="commnets_blog_comment_text"/></td>
+       <td></td>
+    </tr>
+      <tr type="hidden" value=post_blog.id name="pid"></tr>
+      <tr type="hidden" value=page name="pno"></tr>
+    <tr id="submit_record__row">
+       <td></td>
+       <td><input value="Submit" type="submit" /></td>
+       <td></td>
+    </tr>
+  </table>
+  <input value="9038845529" type="hidden" name="_formkey" />
+  <input value="comments_blog" type="hidden" name="_formname" />
+</form>
+
+
+{{if page:}}
+    <a href="{{=URL(args=[page-1],vars=dict(pid=post_blog.id,page=page-1))}}" margin="4px">previous</a>
+{{pass}}
+
+{{if len(comment)>items_per_page:}}
+    <a href="{{=URL(args=[page+1],vars=dict(pid=post_blog.id,page=page+1))}}" style="margin:10px">next</a>
+{{pass}}

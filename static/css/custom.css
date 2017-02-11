@@ -1,0 +1,125 @@
+.navbar{
+  min-height: 40px;
+  margin-bottom: 0px;
+}
+.navbar-default .navbar-nav li a{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color:#ffffff;
+}
+.navbar-default .navbar-nav li a:hover{
+  background-color: #668866;
+}
+.dropdown-menu a{
+  color:black !important;
+}
+.navbar-brand{
+  height:40px;
+  padding-top:10px;
+  padding-bottom: 10px;
+}
+.navbar-default{
+  background-color: #ffffff;
+  border-color:#ccdddd;
+}
+.footer{
+  background-color: #D9DDFF;
+  /*opacity:0.5;*/
+  border-top:solid 1px #AAAAFF;
+  color:#555555;
+  font-size: 1.2rem;
+  height:40px;
+}
+.logo{
+  height:70px;
+  width:120px;
+}
+.menu{
+  padding: 0px 0px 0px 200px;
+  background-color: #C87229;
+  background-color: #002222;
+}
+.footer .footer-container{
+  margin:10px;
+}
+
+.main-container{
+  margin:40px 50px 0px 50px;
+  border-radius: 5px 5px 5px 5px;
+  padding:10px 30px 30px 30px;
+  -moz-border-radius: 5px 5px 5px 5px;
+  -webkit-border-radius: 5px 5px 5px 5px;
+  border: 1px solid #B8B8B8 ;
+  background-color: white;
+}
+body{
+  background: linear-gradient(white,#D9DDFF);
+}
+.btn-default{
+  background-color: #2F4F4F;
+}
+.graybg{
+  border-radius: 8px 8px 8px 8px;
+  padding:15px 30px 15px 30px;
+  -moz-border-radius: 8px 8px 8px 8px;
+  -webkit-border-radius: 8px 8px 8px 8px;
+  border: 1px solid #B8B8B8 ;
+  background-color:#F1F1F1;
+}
+#timer{
+
+}
+hr{
+  margin:5px 0px;
+  border-color:#C3C3C3;
+}
+.accepted{
+  background-color: #CFFAC8;
+}
+.wrong{
+  background-color:#F2DEDE;
+}
+.partial{
+  background-color:#FFFFAA;
+}
+.innerheadercontainer{
+  padding-right:15px;
+  padding-left:15px;
+}
+.innerheader{
+  border-bottom: 2px solid;
+  padding:0px 0px 10px 0px;
+  margin-bottom:20px;
+}
+.icon{
+  height:40px;
+  width:40px;
+}
+.bar{
+  height:80px;
+  width:200px;
+}
+.thead-inverse th{
+  background-color:#374C3C;
+}
+.pagetitle > .col-md-12 > h3{
+  margin-top:10px;
+}
+.pagepath{
+  font-size:1.3rem;
+}
+.homediv{
+  padding:15px 30px 15px 30px;
+  border: 1px solid #B8B8B8 ;
+  background-color:#F1F1F1;
+}
+.caretmodified{
+  display: inline-block;
+width: 0px;
+height: 0px;
+margin-left: 2px;
+vertical-align: middle;
+border-top: 4px dashed;
+border-right: 4px solid transparent;
+border-left: 4px solid transparent;
+}

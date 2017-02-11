@@ -1,0 +1,23 @@
+{{extend 'layout.html'}}
+<div class="col-md-8">
+    <div class="row">
+        <div class="col-md-6">
+        Contest Name : 
+        </div>
+        <div class="col-md-6">         
+            Author : 
+        </div>
+    </div>
+    <br/>
+    {{for rows in contests : }}
+    <div class="row">
+        <div class="col-md-6">
+        {{=(A(rows.Contest_Name, _href=URL('contest_editorial',args=rows.id)))}}
+        </div>
+        <div class="col-md-6">         
+             {{=(db.auth_user[rows.author]).username}} 
+        </div>
+    </div>
+    <br/>
+    {{pass}}
+</div>

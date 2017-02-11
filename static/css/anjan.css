@@ -1,0 +1,24 @@
+pre
+{
+  padding : 3px;
+  border:none;
+  background-color: #ffffff;
+}
+span.stars, span.stars span {
+  display: block;
+  background: url("/oj/static/images/stars.png") 0 -16px repeat-x;
+  width: 80px;
+  height: 16px;
+}
+
+span.stars span {
+  background-position: 0 0;
+}
+.io
+{
+  border-radius: 10px;
+  padding:20px;
+  font-size:20px;
+  border-style: solid;
+  border-width: 1px;
+}

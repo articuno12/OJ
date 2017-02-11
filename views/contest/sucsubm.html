@@ -1,0 +1,66 @@
+{{extend 'layout.html'}}
+<script src="{{=URL('static','js/timer.js')}}"></script>
+<div class="row innerheadercontainer">
+  <div class="col-md-12 innerheader">
+
+    <div class="row">
+      <div class="col-md-5">
+        <div class="row pagepath">
+          <div class="col-md-12">
+            <a href="">Contests </a>>> Successful Submissions for {{=db.problems[pid].name}}
+          </div>
+        </div>
+        <div class="row pagetitle">
+          <div class="col-md-12">
+            <h3>{{=db.problems[pid].contest_id.Contest_Name}}</h3>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col-md-7">
+        <div id='cssmenu'>
+          <ul>
+            <li class="active"><a href='{{=URL('contest','view',args=db.problems[pid].contest_id)}}'>PROBLEMS</a></li>
+            {{if auth.is_logged_in():}}<li><a href='{{=URL('contest','submissions',args=[db.problems[pid].contest_id,'my'])}}'>MY SUBMISSIONS</a></li>{{pass}}
+            <li><a href='{{=URL('contest','allsubmissions',args=db.problems[pid].contest_id)}}'>ALL SUBMISSIONS</a></li>
+            <li><a href='{{=URL('contest','leaderboard',args=db.problems[pid].contest_id)}}'>LEADERBOARD</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class="row" >
+  <div class="col-md-12">
+  <table class="table table-striped">
+    <thead class="thead-inverse">
+      <tr>
+        <th>Submitted By</th>
+        <th>Submitted At</th>
+        <th>Language</th>
+        <th>Result</th>
+        <th>Score</th>
+        <th>Time</th>
+        <th>Memory</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{ for s in submissions:}}
+      <tr>
+        <td>
+          <a href="{{=URL('contest','submissions',args=[db.problems[pid].contest_id,s.uid])}}">  {{=s.uid.first_name}}</a>
+        </td>
+        <td>{{=s.stime}}</td>
+        <td>{{=s.lang}}</td>
+        <td>{{=s.status}}</td>
+        <td>{{=s.score}}</td>
+        <td>{{=s.time}}</td>
+        <td>{{=s.memory}}</td>
+      </tr>
+      {{pass}}
+    </tbody>
+  </table>
+</div>
+</div>

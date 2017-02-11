@@ -1,0 +1,30 @@
+#display-result{
+  border:1px solid;
+  padding:10px;
+}
+
+.result-accepted{
+  background-color:#DFFFD8;
+}
+.result-wrong{
+  background-color:#FDDCDC;
+}
+.result-tle{
+  background-color: #FFFFAA;
+}
+.vcenter{
+  position: absolute;
+  top: 50%;
+  left:55%;
+  transform: translate(-50%,-50%);
+}
+.subdetails{
+  font-size:1rem;
+  border-top:solid 1px;
+  margin-top:15px;
+  padding-top:5px;
+}
+.status{
+  font-size:1.5rem;
+  /*font-weight:bold;*/
+}

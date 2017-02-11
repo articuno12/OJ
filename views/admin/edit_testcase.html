@@ -1,0 +1,44 @@
+{{extend 'layout.html'}}
+<div class="row innerheadercontainer">
+  <div class="col-md-12 innerheader">
+        <div class="row pagetitle">
+          <div class="col-md-12">
+            <h3>Edit Problem</h3>
+          </div>
+        </div>
+  </div>
+</div>
+<form class="form-vertical" role="form" method="post" enctype="multipart/form-data" action="#">
+    <div class="form-group">
+          <!-- Take INput file -->
+          <div class="row">
+              <div class="col-md-2"><label for="usr" class="my_label">Input File</label></div>
+              <div class="col-md-10"><input type="file" name="in_file" id="in_file"  /></div>
+	      </div>
+          <!-- Take output file -->
+          <div class="row">
+              <div class="col-md-2"><label for="usr" class="my_label">Output File</label></div>
+              <div class="col-md-10"><input type="file" name="out_file" id="out_file" /></div>
+	      </div>
+          <!-- Take memory_limit -->
+          <div class="row">
+              <div class="col-md-2"><label for="usr" class="my_label">Memory Limit</label></div>
+              <div class="col-md-10"><input type="integer" class="my_input_box" name="memory_limit" id="memory_limit" value="{{=testcase.memory_limit}}" /></div>
+	      </div>
+          <!-- Take time_limit -->
+          <div class="row">
+              <div class="col-md-2"><label for="usr" class="my_label">Time Limit</label></div>
+              <div class="col-md-10"><input type="integer" class="my_input_box" name="time_limit" id="time_limit" value="{{=testcase.time_limit}}"/></div>
+	      </div>
+          <!-- Take score -->
+          <div class="row">
+              <div class="col-md-2"><label for="usr" class="my_label">Score</label></div>
+              <div class="col-md-10"><input type="integer" class="my_input_box" name="score" id="score" value="{{=testcase.score}}"/></div>
+	      </div>
+            <!-- submit button and add another testcase button-->
+          <div class="row">
+              <div class="col-md-2 my_button"><button type="submit" class="btn btn-default" name="submit" id="submit">Submit</button></div>
+          </div>
+    </div>
+</form>
+<link rel="stylesheet" href="{{=URL('static','css/add_testcase.css')}}"/>

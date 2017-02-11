@@ -1,0 +1,135 @@
+{{extend 'layout.html'}}
+<div class="row">
+  <div class="col-md-12">
+
+  <style>
+  .carousel-inner > .item > img,
+  .carousel-inner > .item > a > img {
+    /*width: 80%;*/
+    margin: auto;
+  }
+  .imgcaraousel{
+    width: auto;
+    height: 400px;
+    max-height: 400px;
+  }
+  </style>
+
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+      <div class="item active">
+        <img src="{{=URL('static','images/home1.jpg')}}" class="imgcaraousel">
+      </div>
+
+      <div class="item">
+        <img src="{{=URL('static','images/home2.png')}}" class="imgcaraousel">
+      </div>
+
+      <div class="item">
+        <img src="{{=URL('static','images/home3.jpg')}}" class="imgcaraousel">
+      </div>
+
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+
+
+</div>
+</div><br>
+<div class="row">
+  <div class="col-md-4">
+    <div class="homediv">
+      <h3>Recent Questions</h3>
+      <table class="table table-striped">
+        {{for ques in recentques:}}
+        <tr><td>
+          <div class="row">
+            <div class="col-md-12">
+              <a href="{{=URL('discuss','discuss_show',vars=dict(pid=ques.id))}}">{{=ques.title}}</a>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              {{=datetime.datetime.now()-ques.pub_date}}
+            </div>
+            <div class="col-md-6">
+              <span class="glyphicon glyphicon-thumbs-up"></span>{{=ques.number_likes}}
+            </div>
+          </div>
+      </td></tr>
+      {{pass}}
+    </table>
+  </div>
+</div>
+
+<div class="col-md-4">
+  <div class="homediv">
+    <h3>Upcoming Contests</h3>
+    <table class="table table-striped">
+      {{for con in upcoming:}}
+      <tr><td>
+        <div class="row">
+          <div class="col-md-12">
+            <a href="{{=URL('contest','view',args=con.id)}}">{{=con.Contest_Name}}</a>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            {{=con.start_time}}
+          </div>
+        </div>
+    </td></tr>
+    {{pass}}
+  </table>
+</div>
+</div>
+
+</div>
+<br>
+{{if auth.is_logged_in():}}
+<div class="row">
+  <div class="col-md-12">
+  <div class="homediv">
+    <h3>Recommended Problems</h3>
+    <table class="table table-striped">
+      {{for problems in rproblems['rpl2']:}}
+      {{if db.problems(problems) is not None:}}
+      <tr><td>
+        <div class="row">
+          <div class="col-md-12">
+
+            <a href="{{=URL('default','problem',args=db.problems(problems).id)}}">{{=db.problems(problems).name}}</a>
+
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+
+          </div>
+        </div>
+    </td></tr>
+    {{pass}}
+    {{pass}}
+  </table>
+</div>
+</div>
+</div>
+{{pass}}
+</div>

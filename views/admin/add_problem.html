@@ -1,0 +1,98 @@
+{{extend 'layout.html'}}
+
+<div class="row innerheadercontainer">
+  <div class="col-md-12 innerheader">
+        <div class="row pagetitle">
+          <div class="col-md-12">
+            <h3>Add Problem</h3>
+          </div>
+        </div>
+  </div>
+</div>
+<form class="form-vertical" role="form" method="post" enctype="multipart/form-data" action="#">
+    <div class="form-group">
+        <!-- Input name -->
+        <div class="row">
+              <div class="col-md-2"><label for="usr" class="my_label">Name</label></div>
+              <div class="col-md-10"><input type="string" class="form-control"  id="name" name="name"></div>
+          </div>
+          <br />
+          <!-- Take description including the inage if entered -->
+          <div class="row form-group">
+              <div class="col-md-2"><label for="usr" class="my_label">Description</label></div>
+              <div class="col-md-10"><textarea class="form-control" rows="12" id="statement" name="statement"></textarea></div>
+	      </div>
+      <!-- Button to add new upload option for images  apply multiple image upload-->
+	     <div class="row">
+              <div class="col-md-2 my_button"><input type="button" for="usr" id="add_image" name="add_image" value="Add Image" /></div>
+	      <div class="col-md-10" id="div_add_image">
+                <input type="file"  name="uploadimage0" class="my_upload_image" id="uploadimage0" />
+              </div>
+          </div>
+          <!-- Button ends here -->
+          <br />
+          <!-- sample input -->
+          <div class="row">
+              <div class="col-md-2"><label for="usr" class="my_label">Sample Input</label></div>
+              <div class="col-md-10"><textarea class="form-control" rows="12" id="sample_input" name="sample_input"></textarea></div>
+          </div>
+          <br />
+          <!-- sample output -->
+          <div class="row">
+              <div class="col-md-2"><label for="usr" class="my_label">Sample Output</label></div>
+              <div class="col-md-10"><textarea class="form-control" rows="12" id="sample_output" name="sample_output"></textarea></div>
+          </div>
+          <!-- level of problem -->
+          <div class="row">
+              <div class="col-md-2 "><label for="usr" class="my_label2">Level</label></div>
+              <div class="col-md-10 my_input_box">
+                  <div class="form-group">
+                      <select class="form-control" id="level" name="level">
+                          <option>Easy</option>
+                          <option>Medium</option>
+                          <option>Hard</option>
+                      </select>
+                  </div>
+              </div>
+          </div>
+          <!-- rating by the setter -->
+          <br />
+          <div class="row">
+              <div class="col-md-2 "><label for="usr" class="my_label3">Thinking Capability</label></div>
+              <div class="col-md-3 my_input_box">
+                  <select class="form-control" id="think" name="think">
+                      {{for i in range(1,11) :}}
+                      <option>{{=i}}</option>
+                      {{pass}}
+                  </select>
+              </div>
+              <div class="col-md-2"><label for="usr" class="my_label3">Coding Intensive</label></div>
+              <div class="col-md-3 my_input_box">
+                  <select class="form-control" id="code" name="code">
+                      {{for i in range(1,11) :}}
+                      <option>{{=i}}</option>
+                      {{pass}}
+                  </select>
+              </div>
+          </div>
+          <br />
+          <!-- tags given by setter -->
+          {{fields_name=['dp','graph','computational_geometry','greedy','search','network_flow','maths','heuristic','string','adhoc','ds']}}
+          {{fields_option=['Dynamic Programing','Graph','Computational Geometry','Greedy','Sort/Search','Network Flow','Maths','Heuristics','Strings','Adhoc','Data Structure']}}
+          <div class="row">
+              <div class="col-md-2"><label for="usr" class="my_label">Tags</label></div>
+              <div class="col-md-10">
+                  {{for field_name,field_option in zip(fields_name,fields_option):}}
+                        <label class="checkbox-inline"><input type="checkbox" name="{{=field_name}}" id="{{=field_name}}">{{=field_option}}</label>
+                        {{pass}}
+             </div>
+          </div>
+          <br />
+          <!-- submit button -->
+          <div class="row"><div class="col-md-2 my_button"><button type="submit" class="btn btn-default">Submit</button></div></div>
+    </div>
+</form>
+<link rel="stylesheet" href="{{=URL('static','css/add_problem.css')}}"/>
+<script src="{{=URL('static','js/add_problem.js')}}"></script>
+<script src="http://tinymce.cachefly.net/4.3/tinymce.min.js"></script>
+<script>tinymce.init({selector:'textarea'});</script>

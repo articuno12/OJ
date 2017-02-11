@@ -1,0 +1,74 @@
+{{extend 'layout.html'}}
+<div class="row innerheadercontainer">
+  <div class="col-md-12 innerheader">
+        <div class="row pagetitle">
+          <div class="col-md-6">
+            <h3>Discussion Forum</h3>
+          </div>
+          <div class="col-md-6" style="text-align:right;">
+            <a href="{{=URL('discuss','ask_question')}}"><input type="button" class="btn btn-default" value="Ask Question"></a>
+          </div>
+        </div>
+  </div>
+</div>
+<div class="row">
+    <div align="center">
+
+      <img width="800px" height="150px"
+      src="{{=URL('static', 'images/discuss.png')}}" />
+
+    </div>
+
+</div>
+<div class="row">
+  <div class="col-md-3">
+    <h3><u>All Discussions</u></h3>
+  </div>
+  <div class="col-md-3">
+    <h4>&nbsp;</h4>
+  </div>
+  <div class="col-md-2">
+    &nbsp;
+  </div>
+  <div class="col-md-2" align="right" style="font-color:black">
+    <h4><u><a href="{{=URL('discuss','discuss_main',vars=dict(orderby='1'))}}">Recent</a></u></h4>
+  </div>
+  <div class="col-md-2" style="font-color:black">
+    <h4><u><a href="{{=URL('discuss','discuss_main',vars=dict(orderby='2'))}}">Most Liked</a></u></h4>
+  </div>
+</div>
+<br />
+<hr />
+{{for i,e in enumerate(rows):}}
+      {{if i==items_per_page: break}}
+<div class="row">
+
+  <div class="col-md-8" align="left">
+    <a href="{{=URL('discuss','discuss_show',vars=dict(pid=e.id,page=0))}}"><h3><b>{{=e.title}}</b></h3></a>
+    <div class="row" align="center">
+      <h5> By {{=e.user_id.first_name}}</h5>
+
+</div>
+</div>
+<div class="col-md-2" align="left">
+  <h4>{{=e.views}}</h4>
+  <div class="row">
+    <h5><b>Views</b></h5>
+  </div>
+</div>
+<div class="col-md-2" align="left">
+  <h4>{{=e.number_likes}}</h4>
+  <div class="row" >
+    <h5><b>Likes</b></h5>
+  </div>
+  </div>
+
+</div>
+<hr />
+{{pass}}
+{{if page:}}
+  <a href="{{=URL(args=[page-1])}}">previous</a>
+{{pass}}
+{{if len(rows)>items_per_page:}}
+<a href="{{=URL(args=[page+1])}}">next</a>
+{{pass}}

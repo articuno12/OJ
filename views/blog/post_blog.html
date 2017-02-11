@@ -1,0 +1,32 @@
+{{extend 'layout.html'}}
+
+<form enctype="multipart/form-data" _action="(={{URL('post_blog')}})" method="post" role="form">
+  <table>
+    <tr id="post_blog_title__row" class="form-group">
+       <td><label id="post_blog_title__label"
+                  for="post_blog_title">Title </label></td>
+       <td class="col-md-10"><input  style="margin:10px" type="text" class="string"
+                  name="title" value="" id="post_blog_title"/></td>
+    </tr>
+    <tr id="post_blog_description__row">
+       <td><label id="post_blog_description__label"
+                  for="post_blog_description">Description</label></td>
+       <td class="col-md-10"><textarea class="form-control" rows="12" name="description" value="" id="post_blog_description"></textarea></td>
+    </tr>
+    <tr id="submit_record__row">
+       <td></td>
+       <td><input value="Submit" type="submit" style="z-index=1;" /></td>
+       <td></td>
+    </tr>
+  </table>
+  <input value="9038845529" type="hidden" name="_formkey" />
+  <input value="post_blog" type="hidden" name="_formname" />
+</form>
+
+<script>
+jQuery("#problem").keyup(function(){
+      ajax('{{=URL('discuss', 'problem_selector')}}', ['problem'], 'suggestions')});
+</script>
+<link rel="stylesheet" href="{{=URL('static','css/ask_question.css')}}"/>
+<script src="http://tinymce.cachefly.net/4.3/tinymce.min.js"></script>
+<script>tinymce.init({selector:'textarea'});</script>

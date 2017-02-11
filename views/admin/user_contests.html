@@ -1,0 +1,31 @@
+{{ extend 'layout.html'}}
+<br />
+<h2>Edit Your Contests Here</h2>
+<br />
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Contest Name</th>
+        <th>Edit</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      {{ for c in conf:}}
+      <tr>
+        <td><h3><a href="{{=URL('admin','show_problems',args=c.id)}}">{{=c.Contest_Name}}</a></h3></td>
+        <td><a href="{{=URL('admin','edit_contest',args=c.id)}}"><h5>Edit</h5></a></td>
+        <td><h5><a href="{{=URL('editorial','contest_editorial',args=c.id)}}">View Editorials</a></h5></td>
+
+      </tr>
+      {{pass}}
+      {{for c in conpast:}}
+      <tr>
+        <td><h3><a href="{{=URL('admin','show_problems',args=c.id)}}">{{=c.Contest_Name}}</a></h3></td>
+        <td><h5>You Cannot Edit Past Contests</h5></td>
+        <td><h5><a href="{{=URL('editorial','contest_editorial',args=c.id)}}">View Editorials</a></h5></td>
+      </tr>
+      {{pass}}
+    </tbody>
+  </table>

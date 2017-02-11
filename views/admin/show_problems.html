@@ -1,0 +1,46 @@
+{{extend 'layout.html'}}
+
+<div class="row innerheadercontainer">
+  <div class="col-md-12 innerheader">
+    <div class="row">
+    <div class="col-md-5">
+      <div class="row pagepath">
+        <div class="col-md-12">
+          <a href="">Admin </a>>> Contests >> Edit Problems
+        </div>
+      </div>
+        <div class="row pagetitle">
+          <div class="col-md-12">
+            <h3>Problems for {{=db.contests(request.args(0,cast=int)).Contest_Name}}</h3>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-7" style="text-align:right;">
+        <a href="{{=URL('admin','add_problem',args=request.args(0,cast=int))}}"><input type="button" class="btn btn-default" value="Add Problems"></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Problem</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      {{ for p in prob:}}
+      <tr>
+        <td><h3>{{=p.name}}</h3></td>
+        <td><a href="{{=URL('admin','edit_problems',args=p.id)}}"><h5>Edit</h5></a></td>
+        <td>
+          <a href="{{=URL('admin','delete_problems',args=p.id)}}"><h5>Delete</h5></a>
+        </td>
+        <td>
+          <a href="{{=URL('editorial','addeditorial',args=p.id)}}"><h5>Add Editorial</h5></a>
+        </td>
+      </tr>
+      {{pass}}
+    </tbody>
+  </table>

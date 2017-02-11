@@ -1,0 +1,80 @@
+{{extend 'layout.html'}}
+
+<div class="row innerheadercontainer">
+  <div class="col-md-12 innerheader">
+
+    <div class="row">
+      <div class="col-md-5">
+        <div class="row pagepath">
+          <div class="col-md-12">
+            <a href="">Home </a>>> Problemset ({{=difficulty}})
+          </div>
+        </div>
+        <div class="row pagetitle">
+          <div class="col-md-12">
+            <h3>PROBLEMSET</h3>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col-md-7">
+        <div id='cssmenu'>
+          <ul>
+            <li {{if difficulty=='easy':}}class="active"{{pass}}><a href='{{=URL(vars=dict(difficulty='easy',orderby=orderby))}}'>EASY</a></li>
+            <li {{if difficulty=='medium':}}class="active"{{pass}}><a href='{{=URL(vars=dict(difficulty='medium',orderby=orderby))}}'>MEDIUM</a></li>
+            <li {{if difficulty=='hard':}}class="active"{{pass}}><a href='{{=URL(vars=dict(difficulty='hard',orderby=orderby))}}'>HARD</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div class="row">
+  <div style="col-md-8">
+
+    <img width="600px"  height="150px"
+    src="{{=URL('static', 'images/p1.jpeg')}}" />
+
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <h2>&nbsp;</h2>
+    <table class="table table-striped">
+      <thead class="thead-inverse">
+        <tr>
+          <th>Problem Name</th>
+          <th>Successful Submissions
+            <a href="{{=URL(vars=dict(difficulty=difficulty,orderby='1'))}}"><img width="10px"  height="10px" src="{{=URL('static', 'images/icon-arrow-down-b-128.png')}}" /></a>
+            <a href="{{=URL(vars=dict(difficulty=difficulty,orderby='2'))}}" ><img width="10px"  height="10px" src="{{=URL('static', 'images/icon-arrow-up-b-128.png')}}" /> </a>
+          </th>
+          <th>Accuracy<a href="{{=URL(vars=dict(difficulty=difficulty,orderby='3'))}}"><img width="10px"  height="10px"
+            src="{{=URL('static', 'images/icon-arrow-down-b-128.png')}}" /></a><a href="{{=URL(vars=dict(difficulty=difficulty,orderby='4'))}}" ><img width="10px"  height="10px"
+              src="{{=URL('static', 'images/icon-arrow-up-b-128.png')}}" /> </a></th>
+            </tr>
+          </thead>
+          <tbody>
+            {{for i,e in enumerate(problems):}}
+            {{if i==items_per_page: break}}
+            <tr>
+              <td><a href="{{=URL('default','problem',args=e.id)}}">{{=e.name}}</a></td>
+              <td>{{=e.submissions}}</td>
+              <td>{{=e.accuracy}}</td>
+            </tr>
+            {{pass}}
+          </tbody>
+          {{if page:}}
+          <a href="{{=URL(args=[page-1])}}">previous</a>
+          {{pass}}
+          {{if len(problems)>items_per_page:}}
+          <a href="{{=URL(args=[page+1])}}">next</a>
+          {{pass}}
+
+        </table>
+      </div>
+    </div>

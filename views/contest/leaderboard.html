@@ -1,0 +1,57 @@
+{{extend 'layout.html'}}
+<script src="{{=URL('static','js/timer.js')}}"></script>
+<div class="row innerheadercontainer">
+  <div class="col-md-12 innerheader">
+
+    <div class="row">
+      <div class="col-md-5">
+        <div class="row pagepath">
+          <div class="col-md-12">
+            <a href="">Contests </a>>> Leaderboard
+          </div>
+        </div>
+        <div class="row pagetitle">
+          <div class="col-md-12">
+            <h3>{{=db.contests[conid].Contest_Name}}</h3>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-md-7">
+        <div id='cssmenu'>
+          <ul>
+            <li><a href='{{=URL('contest','view',args=conid)}}'>PROBLEMS</a></li>
+            {{if auth.is_logged_in():}}<li><a href='{{=URL('contest','submissions',args=[conid,'my'])}}'>MY SUBMISSIONS</a></li>{{pass}}
+            <li><a href='{{=URL('contest','allsubmissions',args=conid)}}'>ALL SUBMISSIONS</a></li>
+            <li class="active"><a href='{{=URL('contest','leaderboard',args=conid)}}'>LEADERBOARD</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row" >
+  <div class="col-md-12">
+  <table class="table table-striped">
+    <thead class="thead-inverse">
+      <tr>
+        <th>#</th>
+        <th>User Name</th>
+        <th>Score</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{ for i,l in enumerate(leaderboard):}}
+      <tr>
+        <td>{{=i+1}}</td>
+        <td>
+          <a href="{{=URL('contest','submissions',args=[conid,l.uid])}}">  {{=l.uid.first_name}}</a>
+        </td>
+        <td>{{=l.score}}</td>
+      </tr>
+      {{pass}}
+    </tbody>
+  </table>
+</div>
+</div>

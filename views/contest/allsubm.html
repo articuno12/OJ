@@ -1,0 +1,65 @@
+{{extend 'layout.html'}}
+<script src="{{=URL('static','js/timer.js')}}"></script>
+<div class="row innerheadercontainer">
+  <div class="col-md-12 innerheader">
+
+    <div class="row">
+      <div class="col-md-5">
+        <div class="row pagepath">
+          <div class="col-md-12">
+            <a href="">Contests </a>>> {{if role=="all":}}All{{else:}}{{if int(uid)==auth.user_id:}}My{{else:}}{{=db.auth_user[uid].first_name}}'s{{pass}}{{pass}} Submissions
+          </div>
+        </div>
+        <div class="row pagetitle">
+          <div class="col-md-12">
+            <h3>{{=contest.Contest_Name}}</h3>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-7">
+        <div id='cssmenu'>
+          <ul>
+            <li><a href='{{=URL('contest','view',args=contest.id)}}'>PROBLEMS</a></li>
+            {{if auth.is_logged_in():}}<li {{if role=='user' and int(uid)==auth.user_id:}}class='active'{{pass}}><a href='{{=URL('contest','submissions',args=[contest.id,'my'])}}'>MY SUBMISSIONS</a></li>{{pass}}
+            <li {{if role=='all' or (role=='user' and int(uid)!=auth.user_id):}}class='active'{{pass}}><a href='{{=URL('contest','allsubmissions',args=contest.id)}}'>ALL SUBMISSIONS</a></li>
+            <li><a href='{{=URL('contest','leaderboard',args=contest.id)}}'>LEADERBOARD</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class="row" >
+  <div class="col-md-12">
+  <table class="table table-striped">
+    <thead class="thead-inverse">
+      <tr>
+        <th>Problem</th>
+        {{if role=="all":}}<th>Submitted By</th>{{pass}}
+        <th>Submitted At</th>
+        <th>Language</th>
+        <th>Result</th>
+        <th>Score</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{ for s in submissions:}}
+      <tr>
+        <td>{{=s.livesubm.pid.name}}</td>
+        {{if role=="all":}}
+        <td>
+        <a href="{{=URL('contest','submissions',args=[contest.id,s.livesubm.uid])}}">  {{=s.livesubm.uid.first_name}}</a>
+        </td>
+        {{pass}}
+        <td>{{=s.livesubm.stime}}</td>
+        <td>{{=s.livesubm.lang}}</td>
+        <td>{{=s.livesubm.status}}</td>
+        <td>{{=s.livesubm.score}}</td>
+      </tr>
+      {{pass}}
+    </tbody>
+  </table>
+</div>
+</div>

@@ -1,0 +1,41 @@
+{{extend 'layout.html'}}
+<div class="row innerheadercontainer">
+  <div class="col-md-12 innerheader">
+        <div class="row pagetitle">
+          <div class="col-md-12">
+            <h3>Add Editorial</h3>
+          </div>
+        </div>
+  </div>
+</div>
+<form enctype="multipart/form-data" _action="(={{URL('add_editorial')}})" method="post" role="form">
+    <div class="form-group">
+    <!--    <div class="row" id="editorial_title__row">
+            <div class="col-md-2"><label id="post_question_title__label" class="my_label" for="post_question_title">Title </label></div>
+       <div class="col-md-10"> <input type="text" class="form-control"  name="title" value="" id="post_question_title"/></div>
+   </div>
+   <br /> -->
+    <div class="row" id="editorial_solution__row">
+       <div class="col-md-2"><label id="editorial_solution__label" class="my_label" for="editorial_solution">Solution</label></div>
+       <div class="col-md-10"><textarea class="form-control" rows="12" name="solution" value="" id="editorial_solution"></textarea></div>
+    </div>
+    <br />
+    <!--
+    <div class="row" id="post_question_problem_id__row">
+       <div class="col-md-2"><label id="post_question_problem_id__label" class="my_label3" for="post_question_problem_id">Tag a prablem </label></div>
+       <div class="col-md-10"><input type="text" class="form-control" id="problem" name="problem"  autocomplete="off"/> <br />
+       <div style="position: absolute; z-index:2; background-color:white" id="suggestions" onclick="document.getElementById('suggestions').style.display='None'"
+        class="suggestions col-md-11"></div></div>
+  </div>
+    <br /> -->
+    <div class="row" id="submit_record__row">
+       <div class="col-md-2 my_button"><input value="Submit" type="submit" style="z-index=1;" /></div></div>
+   </div>
+  <input value="9038845529" type="hidden" name="_formkey" />
+  <input value="editorial" type="hidden" name="_formname" />
+    </div>
+</form>
+
+<link rel="stylesheet" href="{{=URL('static','css/ask_question.css')}}"/>
+<script src="http://tinymce.cachefly.net/4.3/tinymce.min.js"></script>
+<script>tinymce.init({selector:'textarea'});</script>

@@ -1,0 +1,104 @@
+{{extend 'layout.html'}}
+<script src="{{=URL('static','js/timer.js')}}"></script>
+<div class="row innerheadercontainer">
+  <div class="col-md-12 innerheader">
+
+    <div class="row">
+      <div class="col-md-5">
+        <div class="row pagepath">
+          <div class="col-md-12">
+            <a href="">Contests </a>>> Problems
+          </div>
+        </div>
+        <div class="row pagetitle">
+          <div class="col-md-12">
+            <h3>{{=contest.Contest_Name}}</h3>
+          </div>
+        </div>
+
+      </div>
+{{if status!='Future':}}
+      <div class="col-md-7">
+        <div id='cssmenu'>
+          <ul>
+            <li  class='active'><a href='#'>PROBLEMS</a></li>
+            {{if auth.is_logged_in():}}<li><a href='{{=URL('contest','submissions',args=[contest.id,'my'])}}'>MY SUBMISSIONS</a></li>{{pass}}
+            <li><a href='{{=URL('contest','allsubmissions',args=contest.id)}}'>ALL SUBMISSIONS</a></li>
+            <li><a href='{{=URL('contest','leaderboard',args=contest.id)}}'>LEADERBOARD</a></li>
+          </ul>
+        </div>
+      </div>
+      {{pass}}
+    </div>
+
+  </div>
+</div>
+<div class="row problems">
+
+  <div class="col-md-8">
+    {{if status!='Future':}}
+    <div class="row">
+      <div class="col-md-12">
+    <table class="table">
+      <thead class="thead-inverse">
+        <tr>
+          <th>Name</th>
+          <th>Solved by</th>
+          <th>Accuracy</th>
+        </tr>
+        {{for problem in problems:}}
+        <tr {{if auth.is_logged_in():}}class="
+        {{if problem.status==3:}}accepted
+        {{elif problem.status==2:}}partial
+        {{elif problem.status==1:}}wrong
+        {{pass}}
+        "{{pass}}>
+        <td>{{=A(problem.name,_href=URL('default','problem',args=problem.id))}}
+          {{if auth.is_logged_in():}}
+            {{if problem.status==3:}}&nbsp;<span class="glyphicon glyphicon-ok" style="color:green;"></span>
+            {{elif problem.status==2:}}&nbsp;<span class="glyphicon glyphicon-ok" style="color:#EE5;"></span>
+            {{elif problem.status==1:}}&nbsp;<span class="glyphicon glyphicon-remove" style="color:#D55;"></span>
+            {{pass}}
+          {{pass}}
+        </td>
+        <td><a href="{{=URL('contest','problemsubm',args=problem.id)}}">{{=problem.submissions}} <span class="glyphicon glyphicon-user"></span></a></td>
+        <td>{{=format(problem.accuracy,'.2f')}}</td>
+      </tr>
+      {{pass}}
+    </thead>
+  </table>
+</div>
+</div>
+
+  {{pass}}
+
+  <div class="row">
+    <div class="col-md-12">
+      {{=XML(contest.Details)}}
+    </div>
+  </div>
+
+
+</div>
+
+<div class="col-md-4">
+  <div class="graybg">
+    {{if status=='Past':}}
+    CONTEST HAS ENDED
+    {{else:}}
+    {{if status=='Live':}}
+    CONTEST IS LIVE
+    {{else:}}
+    CONTESET IS YET TO BEGIN
+    {{pass}}
+    <hr>
+    <script>$(document).ready(function(){
+      initializetimer({{=timerem.days}},{{=timerem.seconds}});
+    });</script>
+    <div id="timer">
+    </div>
+    REMAINING
+    {{pass}}
+  </div>
+</div>
+</div>

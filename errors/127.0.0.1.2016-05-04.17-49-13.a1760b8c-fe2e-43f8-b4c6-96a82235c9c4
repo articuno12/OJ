@@ -1,0 +1,21 @@
+(dp1
+S'output'
+p2
+S"<type 'exceptions.IndexError'> list index out of range"
+p3
+sS'layer'
+p4
+S'/home/sourav/Documents/Project_OJ/Redefined/applications/oj/controllers/editorial.py'
+p5
+sS'code'
+p6
+S'def editorial_home() :\n    auth_user=db(db.auth_user.id > 0).select()\n    contests=db(db.contests.id > 0).select()\n    return dict(auth_user=auth_user,contests=contests)\ndef contest_editorial() :\n    cid=request.args(0,cast=int)\n    editorial=db(db.editorial.id > 0).select()\n    auth_user=db(db.auth_user.id > 0).select()\n    problems=db(db.problems.id > 0).select()\n    return dict(cid=cid,editorial=editorial,auth_user=auth_user,problems=problems)\n\ndef ind_editorial() :\n    ed=request.args(0,cast=int)\n    editorial=db(db.editorial.id > 0).select()\n    auth_user=db(db.auth_user.id > 0).select()\n    problems=db(db.problems.id > 0).select()\n    req = db(db.editorial.id == ed).select() #req is required row of the editorial\n    reqprob=db(db.problems.id == req[0].pid).select()\n    con=db(db.contests.id == reqprob[0].contest_id).select()\n    image=db(db.problem_image.pid == reqprob[0].id).select()\n    #comments and likes\n    editorial=db.editorial(request.args[0]) or redirect(URL(\'error\'))\n\n    pido=request.args[0]\n    like = db(db.likes_e.page_id == pido).select()\n    no_likes = len(like)\n    if request.vars.page is not None and len(request.vars.page): page=int(request.vars.page)\n    else: page=0\n    items_per_page=9\n    limitby=(page*items_per_page,(page+1)*items_per_page+1)\n    comment=db(db.comments_e.problem_id==pido).select(orderby=~(db.comments_e.number_likes),limitby=limitby)\n    if request.vars.comment_text :\n        form=db.comments_e.validate_and_insert(problem_id=pido,comment_text=request.vars[\'comment_text\'])\n        if form.errors :\n            session.flash="Comment not posted, please comment again"\n        redirect(URL(\'ind_editorial\',args=[pido],vars=dict(page=page)))\n\n    """if editorial.problem_id :\n        problem=db(db.problems.name==post_question.problem_id).select()\n        return dict(post_question=post_question,likes=no_likes,comment=comment,page=page,items_per_page=items_per_page,problem=problem)\n    else:\n        return dict(post_question=post_question,likes=no_likes,comment=comment,page=page,items_per_page=items_per_page,problem=None)\n"""\n    return dict(image=image,ed=ed,editorial=editorial,auth_user=auth_user,problems=problems,req=req,reqprob=reqprob,con=con,likes=no_likes,comment=comment,page=page,items_per_page=items_per_page)\n\n@auth.requires_login()\ndef add_editorial() :\n    problem=db(db.problems.name==request.vars.name).select()\n    prid=problem[0].id\n    form=db.editorial.insert(pid=prid,editorialist=request.vars.editorialist,tester=request.vars.tester,solution=request.vars.solution)\n    if form.accepted:\n        redirect(\'contest\',\'view\')\n    return dict()\n\nresponse._vars=response._caller(add_editorial)\n'
+p7
+sS'snapshot'
+p8
+(dp9
+sS'traceback'
+p10
+S'Traceback (most recent call last):\n  File "/home/sourav/Documents/Project_OJ/Redefined/gluon/restricted.py", line 227, in restricted\n    exec ccode in environment\n  File "/home/sourav/Documents/Project_OJ/Redefined/applications/oj/controllers/editorial.py", line 55, in <module>\n  File "/home/sourav/Documents/Project_OJ/Redefined/gluon/globals.py", line 412, in <lambda>\n    self._caller = lambda f: f()\n  File "/home/sourav/Documents/Project_OJ/Redefined/gluon/tools.py", line 4236, in f\n    return action(*a, **b)\n  File "/home/sourav/Documents/Project_OJ/Redefined/applications/oj/controllers/editorial.py", line 49, in add_editorial\n    prid=problem[0].id\n  File "/home/sourav/Documents/Project_OJ/Redefined/gluon/packages/dal/pydal/objects.py", line 2550, in __getitem__\n    row = self.records[i]\nIndexError: list index out of range\n'
+p11
+s.

@@ -1,0 +1,108 @@
+{{extend 'layout.html'}}
+<link rel="stylesheet" href="{{=URL('static','css/anjan.css')}}">
+<script type="text/javascript">
+$(document).ready(function() {
+  document.getElementById("changestars1").style.width=Math.max(0, (Math.min(5, {{=((float)(problems.think)/2)}})))*16+"px";
+});
+$(document).ready(function() {
+  document.getElementById("changestars2").style.width=Math.max(0, (Math.min(5, {{=((float)(problems.code)/2.0)}})))*16+"px";
+});
+</script>
+
+
+<div class="row innerheadercontainer">
+
+  <div class="col-md-12 innerheader">
+
+    <div class="row">
+      <div class="col-md-5">
+        <div class="row pagepath">
+          <div class="col-md-12">
+            <a href="">Contests </a>>> <a href="">Problems</a> >> {{=problems.name}}
+          </div>
+        </div>
+        <div class="row pagetitle">
+          <div class="col-md-12">
+            <h3>{{=problems.name}}</h3>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col-md-7">
+        <div id='cssmenu'>
+          <ul>
+            <li class="active"><a href='{{=URL('contest','view',args=problems.contest_id)}}'>PROBLEMS</a></li>
+            {{if auth.is_logged_in():}}<li><a href='{{=URL('contest','submissions',args=[problems.contest_id,'my'])}}'>MY SUBMISSIONS</a></li>{{pass}}
+            <li><a href='{{=URL('contest','allsubmissions',args=problems.contest_id)}}'>ALL SUBMISSIONS</a></li>
+            <li><a href='{{=URL('contest','leaderboard',args=problems.contest_id)}}'>LEADERBOARD</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+<div class="row">
+  <div class="col-md-8">
+    {{=PRE(XML(problems.statement))}}
+    <div class="row">
+      <div class="col-md-6" style="font-size:25px">Sample Input : </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12"><div class="io">{{=PRE(XML(problems.sample_input))}}</div></div>
+    </div>
+    <br/>
+    <div class="row">
+      <div class="col-md-6" style="font-size:25px">Sample Output : </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12"><div class="io">{{=PRE(XML(problems.sample_output))}}</div></div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="row">
+      <div class="col-md-7">Correct Submissions:</div><div class="col-md-5">{{=problems.submissions}}</div>
+    </div>
+    <div class="row">
+      <div class="col-md-7">Thinking Capabitility:</div><div class="col-md-5"> <span class="stars" title="{{=problems.think}} / 10"><span id="changestars1"></span></span></div>
+    </div>
+    <div class="row">
+      <div class="col-md-7">Coding Intensive</div><div class="col-md-5"> <span class="stars" title="{{=problems.code}} / 10"><span id="changestars2"></span></span></div>
+    </div><br>
+    {{if archive== True :}}
+    <div class="row">
+      <div class="col-md-12 graybg">
+      This problem Has been Moved To Practice Section.
+      You can still submit your code.
+    </div></div>
+    <br>
+    {{pass}}
+    {{if auth.is_logged_in():}}
+    <div class="row">
+      <div class="col-md-12 graybg">
+        Submit code
+        <hr><div style="font-size:1.3rem;">
+      {{=form}}
+    </div></div>
+    </div>
+    {{else:}}
+    <div class="row">
+      <div class="col-md-12 graybg">
+        <a href="{{=URL('default','user',args='login')}}">Login</a> To Submit Your Code
+      </div>
+    </div>
+    {{pass}}
+    {{if archive== True :}}
+    <br>
+    <div class="row">
+      <div class="col-md-12 graybg">
+      View <a href="{{=URL('editorial','contest_editorial',args=problems.contest_id)}}">Editorials</a> for the contest
+    </div></div>
+    <br>
+    {{pass}}
+  </div>
+</div>
+<br/>

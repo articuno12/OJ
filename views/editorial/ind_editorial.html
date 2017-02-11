@@ -1,0 +1,140 @@
+{{extend 'layout.html'}}
+
+<style>
+    pre
+    {
+        word-wrap: break-word;
+        white-space:pre-wrap;
+    }
+span.stars, span.stars span {
+  display: block;
+  background: url("/oj/static/images/stars.png") 0 -16px repeat-x;
+  width: 80px;
+  height: 16px;
+}
+
+span.stars span {
+  background-position: 0 0;
+}
+</style>
+
+<h1 align="center">Editorial</h1>
+<div class="row" align="center" style="font-size:25px">
+    {{=reqprob[0].name}}
+</div>
+
+<div align="center">
+    <span style="font-size:25px">Problem Author : </span>
+    <span style="font-size:25px">{{=db.auth_user[req[0].author].username}}</span>
+</div>
+<div align="center">
+    <span style="font-size:25px">Editorial Author : </span>
+    <span style="font-size:25px">{{=db.auth_user[con[0].author].first_name}}</span>
+</div>
+<br/>
+
+<div class="col-md-8">
+<div class="row">
+<div class="col-md-6" style="font-size:20px">Problem</div>
+    </div>
+<div class="row">
+ <div class="col-md-12" style="font-size:15px">{{=PRE(XML(reqprob[0].statement))}}</div>
+</div>
+
+<div class="row">
+
+  <div class="col-md-4" style="font-size:20px">Thinking Capability</div>
+  <div class="col-md-4" style="font-size:20px">Implementation</div>
+</div>
+<div class="row">
+<!--     Lanisters send their regards.
+    The north remembers. -->
+
+   <div class="col-md-4"><span class="stars"><span  style="width:{{=max(0, (min(5, ((float)(reqprob[0].think)/2))))*16}}px;"></span></span></div>
+   <div class="col-md-4"><span class="stars"><span  style="width:{{=max(0, (min(5, ((float)(reqprob[0].code)/2))))*16}}px;"></span></span></div>
+</div>
+<br/>
+<div class="row">
+<div class="col-md-8" style="font-size:25px">Solution</div>
+<!--<div class="col-md-4">
+          <form><input type="hidden" id="idss" name="idss" value="" /></form>
+        <div style="float:right; display:inline-inline"> <img style="height:20px; width:20px; padding:0px" src="{{=URL('static','images/likec.jpeg')}}"/><span id="q{{editorial.id}}">{{=likes}}</span> <br />
+ <button style="padding:0px" id="bp{{=editorial.id}}" onclick="document.getElementById('idss').value={{=editorial.id}};
+                ajax('{{=URL('default','add_likep')}}', ['idss'], 'q{{=editorial.id}}');"><img style="height:25px; width:25px; padding:0px" src="{{=URL('static','images/index.png')}}"/></button>
+    </div>
+
+
+</div>-->
+
+    <div class="col-md-4">
+          <form><input type="hidden" id="idss" name="idss" value="" /></form>
+        <div style="float:right; display:inline-inline"> <img style="height:20px; width:20px; padding:0px" src="{{=URL('static','images/likec.jpeg')}}"/><span id="q{{=editorial.id}}">{{=likes}}</span> <br />
+ <button style="padding:0px" id="bp{{=editorial.id}}" onclick="document.getElementById('idss').value={{=editorial.id}};
+                ajax('{{=URL('default','add_likep')}}', ['idss'], 'q{{=editorial.id}}');"><img style="height:25px; width:25px; padding:0px" src="{{=URL('static','images/index.png')}}"/></button>
+    </div>
+
+    </div>
+</div>
+
+<div class="row">
+ <div class="col-md-12" style="font-size:15pX;background-color:#f1f5fc;padding:30px">{{=XML(req[0].solution)}}</div>
+</div>
+</div>
+
+<div class="col-md-4">
+    <div class="row">
+    <div class="col-md-8" style="font-size:15px">
+        Total Submissions :
+    </div>
+    <div class="col-md-4" style="font-size:15px">
+        {{=reqprob[0].submissions}}
+    </div>
+    </div>
+</div>
+<form><input type="hidden" id="ids" name="ids" value="" /></form>
+
+<div class="row">
+  <div class="col-md-12">
+    {{for comments in comment:}}
+<br>    <div>
+    <div class="col-md-6"  style="border-style: solid;
+    border-width: 1px;border-radius: 5px;padding:7px;">{{=XML(comments.comment_text)}}</div>
+    <div class="col-md-2"><div class= "m" style="color:purple" id="b{{=comments.id}}" onclick="document.getElementById('ids').value={{=comments.id}};ajax('{{=URL('default','add_like')}}',['ids'], 'ids');"onmouseover="document.getElementById('b{{=comments.id}}').style.color='red';" onmouseout="document.getElementById('b{{=comments.id}}').style.color='purple';">Like
+</div><br/>
+        </div>
+    </div>
+
+    {{pass}}
+  </div>
+</div>
+<br>
+<div class="row"><div class="col-md-6">
+<form enctype="multipart/form-data" _action="(={{URL('ind_editorial',args=[editorial.id,page])}})" method="post" role="form">
+
+
+       <label id="commnets_comment_text__label"
+                  for="commnets_comment_text">Comment: </label></td>
+
+
+       <textarea class="form-control" rows="12" name="comment_text" value="" id="commnets_comment_text"></textarea></td>
+
+      <input type="hidden" value=editorial.id name="ppid"></input>
+      <input type="hidden" value=page name="pno"></input>
+
+
+<br>       <input value="Submit" type="submit" />
+
+
+  <input value="9038845529" type="hidden" name="_formkey" />
+  <input value="comments" type="hidden" name="_formname" />
+</form>
+
+</div></div>
+
+{{if page:}}
+    <a href="{{=URL(args=[page-1,editorial.id],vars=dict(page=page-1))}}" margin="4px">previous</a>
+{{pass}}
+
+{{if len(comment)>items_per_page:}}
+    <a href="{{=URL(args=[page+1,editorial.id],vars=dict(page=page+1))}}" style="margin:10px">next</a>
+{{pass}}
